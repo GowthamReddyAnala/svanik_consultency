@@ -66,7 +66,7 @@ export default function Home(){
         {/* Hero Section */}
         <section className="grid md:grid-cols-2 gap-8 items-center mb-12">
           <div>
-            <h1 className="text-4xl font-bold text-slate-900">Svanick Consultancy - Expert Guidance</h1>
+            <h1 className="text-4xl font-bold text-slate-900">Svanik Consistency - Expert Guidance</h1>
             <p className="mt-4 text-gray-700">We provide project planning, cost estimation, structural design, permitting guidance, and regulatory compliance to help your projects succeed on time and within budget.</p>
             <div className="mt-6 flex gap-3">
               <a href="#consult" className="bg-blue-600 text-white px-5 py-3 rounded font-medium hover:bg-blue-700">Get a Consultation</a>

@@ -28,7 +28,7 @@ export default function Header(){
       <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
         <button onClick={() => navigate('home')} className="flex items-center space-x-3 cursor-pointer hover:opacity-80">
           <div className="w-10 h-10 bg-blue-600 rounded flex items-center justify-center text-white font-bold">SC</div>
-          <div className="font-semibold">Svanick Consultancy</div>
+          <div className="font-semibold">Svanik Consistency</div>
         </button>
         <nav className="space-x-4">
           <button onClick={() => navigate('home')} className="text-gray-600 hover:text-blue-600">Home</button>
