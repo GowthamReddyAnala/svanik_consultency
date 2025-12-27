@@ -59,6 +59,28 @@ export default function Home(){
     }
   }
 
+  function Carousel(){
+    const images = [
+      'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1400&q=80',
+      'https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=1400&q=80',
+      'https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1400&q=80'
+    ]
+    const [current, setCurrent] = React.useState(0)
+
+    React.useEffect(() => {
+      const t = setInterval(() => setCurrent(c => (c + 1) % images.length), 5000)
+      return () => clearInterval(t)
+    }, [])
+
+    return (
+      <div className="carousel-container w-full h-full relative">
+        {images.map((src, i) => (
+          <img key={i} src={src} alt={`slide-${i}`} className={`carousel-img ${i === current ? 'active' : ''}`} />
+        ))}
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-slate-50">
       <Header />
@@ -75,10 +97,9 @@ export default function Home(){
                 <button onClick={() => { if(window.navigateTo) window.navigateTo('about') }} className="border border-white/30 text-white px-5 py-3 rounded font-medium hover:bg-white/10">Learn More</button>
               </div>
             </div>
-            <div className="bg-white/10 rounded-lg p-8 flex items-center justify-center">
-              <div className="text-center text-white">
-                <div className="text-6xl mb-2">🏗️</div>
-                <p className="text-lg font-semibold">Professional Consultancy Solutions</p>
+            <div className="bg-white/10 rounded-lg p-0 overflow-hidden">
+              <div className="carousel-container h-48 sm:h-56 md:h-64 w-full">
+                <Carousel />
               </div>
             </div>
           </div>
