@@ -102,9 +102,10 @@ git push origin main
    - **Root Directory:** Leave blank
 6. Scroll down → **Environment**
 7. Add environment variables:
-   - `PORT=4000`
-   - `EMAIL_USER=your-email@gmail.com`
-   - `EMAIL_PASSWORD=your-app-password`
+  - `PORT=4000`
+  - `EMAIL_USER=your-email@gmail.com`
+  - `EMAIL_PASSWORD=your-app-password`
+  - `FRONTEND_URL=https://your-frontend.vercel.app`  # used by backend CORS
 8. Click **"Create Web Service"**
 
 ### Step 5: Get Backend URL
@@ -118,6 +119,18 @@ https://svanik-backend.onrender.com
 2. **Settings** → **Environment Variables**
 3. Update `VITE_API_URL` to `https://svanik-backend.onrender.com`
 4. Redeploy
+
+---
+
+## CORS and Frontend URL
+
+The backend uses a simple allow-list for CORS. Set `FRONTEND_URL` in Render to the Vercel frontend URL so the backend accepts requests from the deployed frontend. Example:
+
+```
+FRONTEND_URL=https://your-frontend.vercel.app
+```
+
+If you need to allow multiple origins, you can set `FRONTEND_URL` to the primary origin and update `backend/index.js` to parse a comma-separated list from the env var.
 
 ---
 

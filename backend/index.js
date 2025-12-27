@@ -7,7 +7,10 @@ import { sendconsultationConfirmation, sendconsultationToAdmin, sendContactConfi
 dotenv.config()
 
 const app = express()
-app.use(cors())
+// Configure CORS to allow frontend host (set FRONTEND_URL in Render env)
+const allowedOrigins = [process.env.FRONTEND_URL || 'http://localhost:5173']
+app.use(cors({ origin: allowedOrigins, credentials: true }))
+app.options('*', cors({ origin: allowedOrigins, credentials: true }))
 app.use(express.json())
 
 // Healthcheck endpoint
