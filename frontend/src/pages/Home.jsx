@@ -72,11 +72,47 @@ export default function Home(){
       return () => clearInterval(t)
     }, [])
 
+    const prev = () => setCurrent((c) => (c - 1 + images.length) % images.length)
+    const next = () => setCurrent((c) => (c + 1) % images.length)
+    const goTo = (i) => setCurrent(i)
+
     return (
-      <div className="carousel-container w-full h-full relative">
+      <div className="carousel-container w-full h-full relative group">
         {images.map((src, i) => (
           <img key={i} src={src} alt={`slide-${i}`} className={`carousel-img ${i === current ? 'active' : ''}`} />
         ))}
+        
+        {/* Left Arrow */}
+        <button
+          onClick={prev}
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 bg-black/40 hover:bg-black/60 text-white px-3 py-2 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+          aria-label="Previous slide"
+        >
+          ❮
+        </button>
+
+        {/* Right Arrow */}
+        <button
+          onClick={next}
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 bg-black/40 hover:bg-black/60 text-white px-3 py-2 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+          aria-label="Next slide"
+        >
+          ❯
+        </button>
+
+        {/* Dot Indicators */}
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              className={`w-2.5 h-2.5 rounded-full transition-all ${
+                i === current ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/70'
+              }`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
       </div>
     )
   }
