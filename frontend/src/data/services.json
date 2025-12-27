@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "icon": "📋",
+    "title": "Project Planning",
+    "shortDesc": "Comprehensive feasibility studies, scheduling, and planning.",
+    "fullDesc": "Our project planning services help you establish a solid foundation for success. We conduct thorough feasibility studies, develop realistic timelines, create detailed work breakdowns, allocate resources efficiently, and identify potential risks before they become problems. With our expert guidance, your project stays on track and within budget from day one."
+  },
+  {
+    "id": 2,
+    "icon": "💰",
+    "title": "Cost Estimation",
+    "shortDesc": "Accurate budgeting and cost analysis for all project phases.",
+    "fullDesc": "Precise cost estimation is critical for project success. We analyze material costs, labor expenses, equipment needs, and contingencies to provide accurate budgets. Our value engineering approaches identify cost-saving opportunities without compromising quality. We track actual costs against estimates and provide regular reports to keep your project financially healthy."
+  },
+  {
+    "id": 3,
+    "icon": "🏢",
+    "title": "Structural Design",
+    "shortDesc": "Expert structural analysis and design compliant with codes.",
+    "fullDesc": "Our structural engineers design safe, efficient, and code-compliant buildings. We use advanced CAD tools and analysis software to optimize designs for strength, durability, and cost-effectiveness. From foundation design to superstructure planning, we ensure every element meets or exceeds industry standards and building codes."
+  },
+  {
+    "id": 4,
+    "icon": "📜",
+    "title": "Permits & Regulations",
+    "shortDesc": "Navigate complex permitting and regulatory requirements.",
+    "fullDesc": "Dealing with permits and regulations can be overwhelming. Our team has extensive experience with local, state, and federal requirements. We handle permit applications, coordinate with agencies, ensure compliance with zoning laws, environmental regulations, and building codes. We accelerate the approval process and minimize delays so you can start construction on schedule."
+  },
+  {
+    "id": 5,
+    "icon": "🔍",
+    "title": "Site Assessment",
+    "shortDesc": "Geotechnical surveys and comprehensive site analysis.",
+    "fullDesc": "A thorough site assessment is the foundation of every successful project. We conduct geotechnical surveys, soil testing, environmental assessments, and site feasibility studies. Our reports provide detailed recommendations for foundations, drainage, environmental mitigation, and site preparation to ensure optimal project conditions."
+  },
+  {
+    "id": 6,
+    "icon": "👥",
+    "title": "Project Management",
+    "shortDesc": "Oversight, quality control, and stakeholder coordination.",
+    "fullDesc": "Managing complex construction projects requires expertise and attention to detail. We provide full project management services including scheduling, quality assurance, safety oversight, stakeholder communication, and budget tracking. Our team ensures projects are completed on time, within budget, and to the highest quality standards."
+  },
+  {
+    "id": 7,
+    "icon": "🏗️",
+    "title": "Construction Administration",
+    "shortDesc": "On-site oversight and quality assurance during construction.",
+    "fullDesc": "During construction, we maintain regular site presence to inspect work quality, verify compliance with plans and specifications, track progress, and resolve issues quickly. Our construction administration team acts as your representative on-site, ensuring the contractor delivers exactly what was promised in the contract."
+  },
+  {
+    "id": 8,
+    "icon": "✅",
+    "title": "Quality Assurance & Testing",
+    "shortDesc": "Material testing and quality verification throughout project.",
+    "fullDesc": "Quality is non-negotiable. We conduct material testing, inspection protocols, and quality verification to ensure all work meets specifications. From concrete testing to steel inspections, our comprehensive QA program identifies issues early and prevents costly rework."
+  },
+  {
+    "id": 9,
+    "icon": "📊",
+    "title": "Design-Bid-Build Consulting",
+    "shortDesc": "Complete support for competitive bidding and contractor selection.",
+    "fullDesc": "We prepare detailed plans and specifications for bid packages, evaluate contractor proposals, conduct site visits with bidders, negotiate contracts, and recommend qualified contractors. This competitive process ensures you get the best value and quality for your construction dollars."
+  }
+]
