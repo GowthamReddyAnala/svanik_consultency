@@ -13,7 +13,8 @@ export default function Contact(){
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await fetch('http://localhost:4000/api/contact', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000'
+      const res = await fetch(`${apiUrl}/api/contact`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(formData)

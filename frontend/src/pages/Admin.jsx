@@ -20,9 +20,10 @@ function AdminPanel() {
 
   const fetchData = async () => {
     try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000'
       const [consultRes, contactRes] = await Promise.all([
-        fetch('http://localhost:4000/api/admin/consultations'),
-        fetch('http://localhost:4000/api/admin/contacts')
+        fetch(`${apiUrl}/api/admin/consultations`),
+        fetch(`${apiUrl}/api/admin/contacts`)
       ])
 
       const consultData = await consultRes.json()
@@ -39,9 +40,10 @@ function AdminPanel() {
 
   const updateStatus = async (id, status, type) => {
     try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000'
       const endpoint = type === 'consultation' 
-        ? `http://localhost:4000/api/admin/consultations/${id}`
-        : `http://localhost:4000/api/admin/contacts/${id}`
+        ? `${apiUrl}/api/admin/consultations/${id}`
+        : `${apiUrl}/api/admin/contacts/${id}`
       
       const res = await fetch(endpoint, {
         method: 'PATCH',
