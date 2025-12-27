@@ -1,4 +1,4 @@
-# Svanik Consistency - Web Application
+# svanik consultency - Web Application
 
 A full-stack web application for professional consultancy services with landing page, consultation form, booking calendar, services listing, testimonials, and contact pages.
 
@@ -68,7 +68,7 @@ npm run dev:backend
 ## Project Structure
 
 ```
-svanik-consistency/
+svanik-consultency/
 ├── frontend/              # React + Vite application
 │   ├── src/
 │   │   ├── pages/        # Home, About, Contact pages

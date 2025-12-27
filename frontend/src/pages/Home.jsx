@@ -61,25 +61,30 @@ export default function Home(){
   return (
     <div className="min-h-screen bg-slate-50">
       <Header />
+
+      {/* Full-width Hero (moved outside main) */}
+      <section className="hero-bg rounded-b-lg overflow-hidden">
+        <div className="hero-overlay px-6 py-20">
+          <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+            <div className="text-white">
+                <h1 className="text-4xl font-bold">svanik consultency - Expert Guidance</h1>
+              <p className="mt-4 text-white/90">We provide project planning, cost estimation, structural design, permitting guidance, and regulatory compliance to help your projects succeed on time and within budget.</p>
+              <div className="mt-6 flex gap-3">
+                <a href="#consult" className="bg-green-500 text-white px-5 py-3 rounded font-medium hover:bg-green-600">Get a Consultation</a>
+                <button onClick={() => { if(window.navigateTo) window.navigateTo('about') }} className="border border-white/30 text-white px-5 py-3 rounded font-medium hover:bg-white/10">Learn More</button>
+              </div>
+            </div>
+            <div className="bg-white/10 rounded-lg p-8 flex items-center justify-center">
+              <div className="text-center text-white">
+                <div className="text-6xl mb-2">🏗️</div>
+                <p className="text-lg font-semibold">Professional Consultancy Solutions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <main className="max-w-5xl mx-auto px-6 py-12">
-        
-        {/* Hero Section */}
-        <section className="grid md:grid-cols-2 gap-8 items-center mb-12">
-          <div>
-            <h1 className="text-4xl font-bold text-slate-900">Svanik Consistency - Expert Guidance</h1>
-            <p className="mt-4 text-gray-700">We provide project planning, cost estimation, structural design, permitting guidance, and regulatory compliance to help your projects succeed on time and within budget.</p>
-            <div className="mt-6 flex gap-3">
-              <a href="#consult" className="bg-blue-600 text-white px-5 py-3 rounded font-medium hover:bg-blue-700">Get a Consultation</a>
-              <button onClick={() => { if(window.navigateTo) window.navigateTo('about') }} className="border border-blue-600 text-blue-600 px-5 py-3 rounded font-medium hover:bg-blue-50">Learn More</button>
-            </div>
-          </div>
-          <div className="bg-gradient-to-br from-blue-100 to-blue-50 rounded-lg shadow-lg p-8 flex items-center justify-center">
-            <div className="text-center">
-              <div className="text-6xl mb-2">🏗️</div>
-              <p className="text-lg font-semibold text-slate-700">Professional Consultancy Solutions</p>
-            </div>
-          </div>
-        </section>
 
         {/* Consultation Form Section */}
         <section id="consult" className="bg-white rounded shadow-lg p-8 mb-12">
@@ -214,6 +219,56 @@ export default function Home(){
           </div>
         </section>
 
+        {/* Industry Images Gallery */}
+        <section className="mb-12">
+          <h2 className="text-3xl font-semibold mb-6">Industry Experience</h2>
+          <p className="text-gray-600 mb-4">We have worked across diverse sectors — infrastructure, residential, commercial, industrial, and public works.</p>
+          <div className="industry-grid">
+            <div className="industry-card">
+              <img src="https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=800&q=60" alt="infrastructure" />
+              <div className="card-body">
+                <h3 className="font-semibold">Infrastructure</h3>
+                <p className="text-sm text-gray-600">Bridges, roads, and public works planning.</p>
+              </div>
+            </div>
+            <div className="industry-card">
+              <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=60" alt="residential" />
+              <div className="card-body">
+                <h3 className="font-semibold">Residential</h3>
+                <p className="text-sm text-gray-600">Housing development and site design.</p>
+              </div>
+            </div>
+            <div className="industry-card">
+              <img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=800&q=60" alt="commercial" />
+              <div className="card-body">
+                <h3 className="font-semibold">Commercial</h3>
+                <p className="text-sm text-gray-600">Office, retail and complex builds.</p>
+              </div>
+            </div>
+            <div className="industry-card">
+              <img src="https://images.unsplash.com/photo-1581093588401-1c0a8f6b3c02?auto=format&fit=crop&w=800&q=60" alt="industrial" />
+              <div className="card-body">
+                <h3 className="font-semibold">Industrial</h3>
+                <p className="text-sm text-gray-600">Warehouses, factories and logistics hubs.</p>
+              </div>
+            </div>
+            <div className="industry-card">
+              <img src="https://images.unsplash.com/photo-1573497019414-1f9d7b1c6b7a?auto=format&fit=crop&w=800&q=60" alt="public" />
+              <div className="card-body">
+                <h3 className="font-semibold">Public Works</h3>
+                <p className="text-sm text-gray-600">Parks, utilities, civic facilities.</p>
+              </div>
+            </div>
+            <div className="industry-card">
+              <img src="https://images.unsplash.com/photo-1526470608268-f674ce90ebd4?auto=format&fit=crop&w=800&q=60" alt="site" />
+              <div className="card-body">
+                <h3 className="font-semibold">Site Assessment</h3>
+                <p className="text-sm text-gray-600">Geotechnical and environmental surveys.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Testimonials Section */}
         <section className="mb-12">
           <h2 className="text-3xl font-semibold mb-6">Testimonials & Case Studies</h2>
@@ -265,7 +320,7 @@ export default function Home(){
           <div className="grid md:grid-cols-2 gap-6">
             <div>
               <p className="font-medium">Email:</p>
-              <p className="text-blue-600">info@civilconsult.com</p>
+              <p className="text-blue-600">info@svanikconsultency.com</p>
             </div>
             <div>
               <p className="font-medium">Phone:</p>
@@ -309,7 +364,7 @@ export default function Home(){
             </div>
           </div>
           <div className="border-t border-gray-700 pt-4 flex justify-between items-center text-sm">
-            <p>© {new Date().getFullYear()} Civil Consulting. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} svanik consultency. All rights reserved.</p>
             <div className="space-x-4">
               <a href="#" className="text-gray-300 hover:text-white">LinkedIn</a>
               <a href="#" className="text-gray-300 hover:text-white">Twitter</a>
