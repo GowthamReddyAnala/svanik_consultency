@@ -1,4 +1,4 @@
-# svanik-consultant - Web Application
+# Svanik Consultant - Web Application
 
 A full-stack web application for professional consultancy services with landing page, consultation form, booking calendar, services listing, testimonials, contact pages, **and image gallery management**.
 
@@ -80,7 +80,7 @@ npm run dev:backend
 ## Project Structure
 
 ```
-svanik-consultant/
+Svanik Consultant/
 ├── frontend/              # React + Vite application
 │   ├── src/
 │   │   ├── pages/        # Home, About, Contact, Admin pages

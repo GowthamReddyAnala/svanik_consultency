@@ -1,4 +1,4 @@
-# svanik-consultant - Deployment Guide
+# Svanik Consultant - Deployment Guide
 
 ## Free Hosting Options
 
@@ -25,10 +25,10 @@ git commit -m "Initial commit"
 ```
 
 ### Step 2: Push to GitHub
-1. Go to [GitHub](https://github.com/new) and create new repo named `svanik-consultant`
+1. Go to [GitHub](https://github.com/new) and create new repo named `Svanik Consultant`
 2. Copy the commands shown and run them in your project folder:
 ```bash
-git remote add origin https://github.com/YOUR_USERNAME/svanik-consultant.git
+git remote add origin https://github.com/YOUR_USERNAME/Svanik Consultant.git
 git branch -M main
 git push -u origin main
 ```
@@ -93,7 +93,7 @@ git push origin main
 1. Go to [Render.com](https://render.com)
 2. Click **"New +"** → **"Web Service"**
 3. Select **"Deploy an existing Git repository"**
-3. Connect your GitHub account and select `svanik-consultant`
+3. Connect your GitHub account and select `Svanik Consultant`
 5. **Settings:**
   - **Name:** `svanik-backend`
    - **Environment:** `Node`

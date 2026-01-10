@@ -39,7 +39,7 @@ export default function Header(){
             <div className="w-10 sm:w-12 h-8 sm:h-10 rounded flex items-center justify-center text-white font-bold text-sm sm:text-base overflow-hidden logo-gradient float-slow" style={{background: 'linear-gradient(135deg, var(--brand-1), var(--brand-2))'}}>
               <img src="/logo-full.svg" alt="Logo" className="w-10 sm:w-12 h-6 sm:h-8 object-contain"/>
             </div>
-            <div className="font-semibold text-sm sm:text-base gradient-bg">svanik-consultant</div>
+            <div className="font-semibold text-sm sm:text-base gradient-bg">Svanik Consultant</div>
           </button>
           
           {/* Desktop Navigation */}

@@ -145,7 +145,7 @@ export default function Home(){
         <div className="hero-overlay px-4 sm:px-6 py-12 sm:py-20">
           <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
             <div className="text-white">
-                <h1 className="text-3xl sm:text-4xl font-bold gradient-bg animate-fade-in">svanik-consultant - Expert Guidance</h1>
+                <h1 className="text-3xl sm:text-4xl font-bold gradient-bg animate-fade-in">Svanik Consultant - Expert Guidance</h1>
               <p className="mt-3 sm:mt-4 text-sm sm:text-base text-white/90 animate-fade-in delay-200">We provide project planning, cost estimation, structural design, permitting guidance, and regulatory compliance to help your projects succeed on time and within budget.</p>
               <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-3">
                 <a href="#consult" className="btn-gradient px-4 sm:px-5 py-2 sm:py-3 rounded font-medium text-center shadow-sm">Get a Consultation</a>
@@ -446,7 +446,7 @@ export default function Home(){
             </div>
           </div>
           <div className="border-t border-gray-700 pt-4 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs sm:text-sm">
-            <p>© {new Date().getFullYear()} svanik-consultant. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Svanik Consultant. All rights reserved.</p>
             <div className="space-x-4">
               <a href="#" className="text-gray-300 hover:text-white">LinkedIn</a>
               <a href="#" className="text-gray-300 hover:text-white">Twitter</a>
