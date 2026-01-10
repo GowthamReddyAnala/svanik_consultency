@@ -1,4 +1,4 @@
-# svanik consultency - Web Application
+# svanik-consultant - Web Application
 
 A full-stack web application for professional consultancy services with landing page, consultation form, booking calendar, services listing, testimonials, contact pages, **and image gallery management**.
 

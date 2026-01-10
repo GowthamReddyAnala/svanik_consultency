@@ -1,4 +1,4 @@
-# svanik consultency - Deployment Guide
+# svanik-consultant - Deployment Guide
 
 ## Free Hosting Options
 
