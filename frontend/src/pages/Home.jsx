@@ -60,82 +60,6 @@ export default function Home(){
     }
   }
 
-  function Carousel(){
-    const images = [
-      'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1400&q=80',
-      'https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=1400&q=80',
-      'https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1400&q=80'
-    ]
-    const [current, setCurrent] = React.useState(0)
-
-    React.useEffect(() => {
-      const t = setInterval(() => setCurrent(c => (c + 1) % images.length), 5000)
-      return () => clearInterval(t)
-    }, [])
-
-    const prev = () => setCurrent((c) => (c - 1 + images.length) % images.length)
-    const next = () => setCurrent((c) => (c + 1) % images.length)
-    const goTo = (i) => setCurrent(i)
-
-    // auto-advance with gentle timing
-    React.useEffect(() => {
-      const t = setInterval(() => setCurrent(c => (c + 1) % images.length), 6000)
-      return () => clearInterval(t)
-    }, [])
-
-    return (
-      <div className="carousel-container w-full h-full relative group will-change-transform">
-        {images.map((src, i) => {
-          const state = i === current ? 'active' : (i === (current - 1 + images.length) % images.length ? 'prev' : (i === (current + 1) % images.length ? 'next' : 'off'))
-          // calculate lightweight parallax offset for active image
-          const dx = (i - current) * 100
-          return (
-            <img
-              key={i}
-              src={src}
-              alt={`slide-${i}`}
-              className={`carousel-img`}
-              data-state={state}
-              style={{ transform: state === 'active' ? 'scale(1) translateY(0)' : 'scale(1.04) translateY(6px)', opacity: state === 'active' ? 1 : 0.35 }}
-            />
-          )
-        })}
-        
-        {/* Left Arrow */}
-        <button
-          onClick={prev}
-          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 bg-black/40 hover:bg-black/60 text-white px-3 py-2 rounded opacity-0 group-hover:opacity-100 transition-opacity"
-          aria-label="Previous slide"
-        >
-          ❮
-        </button>
-
-        {/* Right Arrow */}
-        <button
-          onClick={next}
-          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 bg-black/40 hover:bg-black/60 text-white px-3 py-2 rounded opacity-0 group-hover:opacity-100 transition-opacity"
-          aria-label="Next slide"
-        >
-          ❯
-        </button>
-
-        {/* Dot Indicators */}
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-          {images.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              className={`w-2.5 h-2.5 rounded-full transition-all ${
-                i === current ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/70'
-              }`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div className="min-h-screen bg-slate-50">
       <Header />
@@ -150,11 +74,6 @@ export default function Home(){
               <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-3">
                 <a href="#consult" className="btn-gradient px-4 sm:px-5 py-2 sm:py-3 rounded font-medium text-center shadow-sm">Get a Consultation</a>
                 <button onClick={() => { if(window.navigateTo) window.navigateTo('about') }} className="border border-white/30 text-white px-4 sm:px-5 py-2 sm:py-3 rounded font-medium hover:bg-white/10 text-center">Learn More</button>
-              </div>
-            </div>
-            <div className="bg-white/10 rounded-lg p-0 overflow-hidden">
-              <div className="carousel-container h-40 sm:h-56 md:h-64 w-full">
-                <Carousel />
               </div>
             </div>
           </div>
