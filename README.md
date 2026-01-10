@@ -1,6 +1,18 @@
 # svanik consultency - Web Application
 
-A full-stack web application for professional consultancy services with landing page, consultation form, booking calendar, services listing, testimonials, and contact pages.
+A full-stack web application for professional consultancy services with landing page, consultation form, booking calendar, services listing, testimonials, contact pages, **and image gallery management**.
+
+## ✨ New Feature: Image Upload & Gallery
+
+**Admins can now upload, manage, and display images!**
+- 📸 Upload up to 10 images at once
+- 🏷️ Organize by categories  
+- 👥 Display gallery to users
+- ✏️ Edit image metadata
+- 🗑️ Delete unused images
+- 📱 Fully responsive design
+
+[Quick Start Guide](QUICK_START_IMAGES.md) | [Full Documentation](IMAGE_UPLOAD_GUIDE.md) | [Implementation Details](IMAGE_UPLOAD_IMPLEMENTATION.md)
 
 ## Prerequisites
 
@@ -68,17 +80,19 @@ npm run dev:backend
 ## Project Structure
 
 ```
-svanik-consultency/
+svanik-consultant/
 ├── frontend/              # React + Vite application
 │   ├── src/
-│   │   ├── pages/        # Home, About, Contact pages
-│   │   ├── components/   # Header, Form, Calendar, etc.
+│   │   ├── pages/        # Home, About, Contact, Admin pages
+│   │   ├── components/   # Header, Form, Calendar, Gallery, etc.
 │   │   ├── App.jsx
 │   │   └── main.jsx
 │   ├── index.html
 │   └── package.json
 ├── backend/              # Express API server
-│   ├── index.js          # Main server file
+│   ├── index.js          # Main server + image endpoints
+│   ├── database.js       # Database schema + functions
+│   ├── uploads/          # Image storage (created automatically)
 │   └── package.json
 ├── package.json          # Root config (concurrently)
 └── README.md
@@ -91,13 +105,30 @@ svanik-consultency/
 - **Booking Calendar**: Available consultation slots
 - **Services List**: Project Planning, Cost Estimation, Structural Design, etc.
 - **Testimonials**: Customer feedback and case studies
+- **Gallery Management** ⭐: **NEW**
+  - Admin upload and management interface
+  - User-facing responsive gallery
+  - Category filtering
+  - Lightbox view
+  - Image optimization
 - **About Us**: Team, mission, experience
 - **Contact**: Footer with privacy, terms, social links
 
 ## API Endpoints
 
+### Consultation & Contact
 - `GET /api/slots` — Fetch available consultation time slots
 - `POST /api/consultation` — Submit consultation request
+- `POST /api/contact` — Submit contact message
+- `GET /api/admin/consultations` — Get all consultations (admin)
+- `GET /api/admin/contacts` — Get all contacts (admin)
+
+### Image Gallery
+- `GET /api/gallery` — Get all public images
+- `POST /api/admin/gallery/upload` — Upload images (admin)
+- `GET /api/admin/gallery/:id` — Get image details (admin)
+- `PATCH /api/admin/gallery/:id` — Update image metadata (admin)
+- `DELETE /api/admin/gallery/:id` — Delete image (admin)
 
 ## Troubleshooting
 
@@ -107,6 +138,19 @@ svanik-consultency/
 
 ### Port already in use
 - Change port in `backend/index.js`: `const port = process.env.PORT || 4000`
+
+### Image upload issues
+- Ensure backend dependencies are installed: `cd backend && npm install`
+- Check `/backend/uploads/` directory was created
+- Verify images are less than 10MB
+- Ensure files are valid image formats (JPEG, PNG, WebP, GIF)
+
+## Documentation
+
+- [Image Upload Quick Start](QUICK_START_IMAGES.md) - Get started in 5 minutes
+- [Image Upload Guide](IMAGE_UPLOAD_GUIDE.md) - Complete documentation
+- [Implementation Details](IMAGE_UPLOAD_IMPLEMENTATION.md) - Technical overview
+- [Quick Reference](IMAGE_UPLOAD_REFERENCE.md) - API and feature reference
 - Or set environment: `set PORT=5000` (cmd) or `$env:PORT=5000` (PowerShell)
 
 ### Frontend shows blank page

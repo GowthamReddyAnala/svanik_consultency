@@ -51,6 +51,23 @@ db.serialize(() => {
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `)
+
+  // Gallery images table
+  db.run(`
+    CREATE TABLE IF NOT EXISTS gallery_images (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      filename TEXT NOT NULL UNIQUE,
+      original_name TEXT NOT NULL,
+      file_path TEXT NOT NULL,
+      thumbnail_path TEXT,
+      alt_text TEXT,
+      category TEXT DEFAULT 'General',
+      description TEXT,
+      display_order INTEGER DEFAULT 0,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `)
 })
 
 // Helper functions
@@ -159,6 +176,106 @@ const updateContactMessageStatus = (id, status) => {
   })
 }
 
+// Image gallery functions
+const saveImage = (data) => {
+  return new Promise((resolve, reject) => {
+    db.run(
+      `INSERT INTO gallery_images (filename, original_name, file_path, thumbnail_path, alt_text, category, description, display_order) 
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [data.filename, data.original_name, data.file_path, data.thumbnail_path || null, data.alt_text || '', data.category || 'General', data.description || '', data.display_order || 0],
+      function(err) {
+        if (err) reject(err)
+        else resolve({id: this.lastID, ...data})
+      }
+    )
+  })
+}
+
+const getAllImages = () => {
+  return new Promise((resolve, reject) => {
+    db.all(
+      `SELECT * FROM gallery_images ORDER BY display_order ASC, created_at DESC`,
+      (err, rows) => {
+        if (err) reject(err)
+        else resolve(rows || [])
+      }
+    )
+  })
+}
+
+const getImageById = (id) => {
+  return new Promise((resolve, reject) => {
+    db.get(
+      `SELECT * FROM gallery_images WHERE id = ?`,
+      [id],
+      (err, row) => {
+        if (err) reject(err)
+        else resolve(row)
+      }
+    )
+  })
+}
+
+const updateImage = (id, data) => {
+  return new Promise((resolve, reject) => {
+    const updates = []
+    const values = []
+    
+    if (data.alt_text !== undefined) {
+      updates.push('alt_text = ?')
+      values.push(data.alt_text)
+    }
+    if (data.description !== undefined) {
+      updates.push('description = ?')
+      values.push(data.description)
+    }
+    if (data.category !== undefined) {
+      updates.push('category = ?')
+      values.push(data.category)
+    }
+    if (data.display_order !== undefined) {
+      updates.push('display_order = ?')
+      values.push(data.display_order)
+    }
+    
+    updates.push('updated_at = CURRENT_TIMESTAMP')
+    values.push(id)
+    
+    const query = `UPDATE gallery_images SET ${updates.join(', ')} WHERE id = ?`
+    
+    db.run(query, values, function(err) {
+      if (err) reject(err)
+      else resolve({id, ...data})
+    })
+  })
+}
+
+const deleteImage = (id) => {
+  return new Promise((resolve, reject) => {
+    db.run(
+      `DELETE FROM gallery_images WHERE id = ?`,
+      [id],
+      function(err) {
+        if (err) reject(err)
+        else resolve({id})
+      }
+    )
+  })
+}
+
+const getImageByFilename = (filename) => {
+  return new Promise((resolve, reject) => {
+    db.get(
+      `SELECT * FROM gallery_images WHERE filename = ?`,
+      [filename],
+      (err, row) => {
+        if (err) reject(err)
+        else resolve(row)
+      }
+    )
+  })
+}
+
 export {
   db,
   saveconsultation,
@@ -168,5 +285,11 @@ export {
   getAllContactMessages,
   getconsultationById,
   updateconsultationStatus,
-  updateContactMessageStatus
+  updateContactMessageStatus,
+  saveImage,
+  getAllImages,
+  getImageById,
+  updateImage,
+  deleteImage,
+  getImageByFilename
 }

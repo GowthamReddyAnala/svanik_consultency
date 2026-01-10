@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PageWrapper from '../components/PageWrapper'
+import ImageGalleryAdmin from '../components/ImageGalleryAdmin'
 
 function AdminPanel() {
   const [activeTab, setActiveTab] = useState('consultations')
@@ -180,62 +181,79 @@ function AdminPanel() {
             >
               Contact Messages ({contacts.length})
             </button>
+            <button
+              onClick={() => setActiveTab('gallery')}
+              className={`flex-1 py-4 px-6 font-medium text-center ${
+                activeTab === 'gallery'
+                  ? 'border-b-2 border-blue-600 text-blue-600'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Gallery
+            </button>
           </div>
 
-          {/* Controls */}
-          <div className="p-6 border-b bg-gray-50">
-            <div className="grid md:grid-cols-4 gap-4">
-              <input
-                type="text"
-                placeholder="Search by name or email..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              
-              {activeTab === 'consultations' && (
-                <select
-                  value={filterType}
-                  onChange={(e) => setFilterType(e.target.value)}
-                  className="border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="all">All Types</option>
-                  <option value="Project Planning">Project Planning</option>
-                  <option value="Cost Estimation">Cost Estimation</option>
-                  <option value="Structural Design">Structural Design</option>
-                  <option value="Permits and Regulations">Permits & Regulations</option>
-                  <option value="Other">Other</option>
-                </select>
-              )}
-
-              <select
-                value={filterStatus}
-                onChange={(e) => setFilterStatus(e.target.value)}
-                className="border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="all">All Statuses</option>
-                <option value="new">New</option>
-                <option value="viewed">Viewed</option>
-                <option value="contacted">Contacted</option>
-              </select>
-
-              <button
-                onClick={() => exportToCSV(
-                  activeTab === 'consultations' ? filteredconsultations : filteredContacts,
-                  `${activeTab}_${new Date().toISOString().split('T')[0]}.csv`
-                )}
-                className="bg-green-600 text-white px-4 py-2 rounded font-medium hover:bg-green-700"
-              >
-                Export CSV
-              </button>
+          {/* Gallery Tab Content */}
+          {activeTab === 'gallery' ? (
+            <div className="p-6">
+              <ImageGalleryAdmin />
             </div>
-          </div>
+          ) : (
+            <>
+              {/* Controls */}
+              <div className="p-6 border-b bg-gray-50">
+                <div className="grid md:grid-cols-4 gap-4">
+                  <input
+                    type="text"
+                    placeholder="Search by name or email..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  
+                  {activeTab === 'consultations' && (
+                    <select
+                      value={filterType}
+                      onChange={(e) => setFilterType(e.target.value)}
+                  className="border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="all">All Types</option>
+                      <option value="Project Planning">Project Planning</option>
+                      <option value="Cost Estimation">Cost Estimation</option>
+                      <option value="Structural Design">Structural Design</option>
+                      <option value="Permits and Regulations">Permits & Regulations</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  )}
 
-          {/* Content */}
-          <div className="p-6">
-            {loading ? (
-              <div className="text-center py-8 text-gray-500">Loading...</div>
-            ) : activeTab === 'consultations' ? (
+                  <select
+                    value={filterStatus}
+                    onChange={(e) => setFilterStatus(e.target.value)}
+                    className="border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="all">All Statuses</option>
+                    <option value="new">New</option>
+                    <option value="viewed">Viewed</option>
+                    <option value="contacted">Contacted</option>
+                  </select>
+
+                  <button
+                    onClick={() => exportToCSV(
+                      activeTab === 'consultations' ? filteredconsultations : filteredContacts,
+                      `${activeTab}_${new Date().toISOString().split('T')[0]}.csv`
+                    )}
+                    className="bg-green-600 text-white px-4 py-2 rounded font-medium hover:bg-green-700"
+                  >
+                    Export CSV
+                  </button>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-6">
+                {loading ? (
+                  <div className="text-center py-8 text-gray-500">Loading...</div>
+                ) : activeTab === 'consultations' ? (
               <div className="space-y-4">
                 {filteredconsultations.length === 0 ? (
                   <div className="text-center py-8 text-gray-500">No consultations found</div>
@@ -371,18 +389,22 @@ function AdminPanel() {
                 )}
               </div>
             )}
-          </div>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Refresh Button */}
-        <div className="text-center">
-          <button
-            onClick={fetchData}
-            className="bg-blue-600 text-white px-6 py-2 rounded font-medium hover:bg-blue-700"
-          >
-            Refresh Data
-          </button>
-        </div>
+        {activeTab !== 'gallery' && (
+          <div className="text-center">
+            <button
+              onClick={fetchData}
+              className="bg-blue-600 text-white px-6 py-2 rounded font-medium hover:bg-blue-700"
+            >
+              Refresh Data
+            </button>
+          </div>
+        )}
 
       </main>
     </div>

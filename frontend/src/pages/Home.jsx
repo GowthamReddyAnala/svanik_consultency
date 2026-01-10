@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import Header from '../components/Header'
+import ImageGallery from '../components/ImageGallery'
 
 function ServiceCard({title, desc}){
   const [expanded, setExpanded] = useState(false)
   return (
-    <div className="bg-white shadow rounded p-4 hover:shadow-lg transition">
+    <div className="bg-white shadow rounded p-4 hover:shadow-lg transition card-animate animate-fade-in">
       <h3 className="font-semibold text-lg">{title}</h3>
       <p className="text-sm text-gray-600 mt-2">{desc}</p>
       <button 
@@ -76,11 +77,29 @@ export default function Home(){
     const next = () => setCurrent((c) => (c + 1) % images.length)
     const goTo = (i) => setCurrent(i)
 
+    // auto-advance with gentle timing
+    React.useEffect(() => {
+      const t = setInterval(() => setCurrent(c => (c + 1) % images.length), 6000)
+      return () => clearInterval(t)
+    }, [])
+
     return (
-      <div className="carousel-container w-full h-full relative group">
-        {images.map((src, i) => (
-          <img key={i} src={src} alt={`slide-${i}`} className={`carousel-img ${i === current ? 'active' : ''}`} />
-        ))}
+      <div className="carousel-container w-full h-full relative group will-change-transform">
+        {images.map((src, i) => {
+          const state = i === current ? 'active' : (i === (current - 1 + images.length) % images.length ? 'prev' : (i === (current + 1) % images.length ? 'next' : 'off'))
+          // calculate lightweight parallax offset for active image
+          const dx = (i - current) * 100
+          return (
+            <img
+              key={i}
+              src={src}
+              alt={`slide-${i}`}
+              className={`carousel-img`}
+              data-state={state}
+              style={{ transform: state === 'active' ? 'scale(1) translateY(0)' : 'scale(1.04) translateY(6px)', opacity: state === 'active' ? 1 : 0.35 }}
+            />
+          )
+        })}
         
         {/* Left Arrow */}
         <button
@@ -123,18 +142,18 @@ export default function Home(){
 
       {/* Full-width Hero (moved outside main) */}
       <section className="hero-bg rounded-b-lg overflow-hidden">
-        <div className="hero-overlay px-6 py-20">
-          <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+        <div className="hero-overlay px-4 sm:px-6 py-12 sm:py-20">
+          <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
             <div className="text-white">
-                <h1 className="text-4xl font-bold">svanik consultency - Expert Guidance</h1>
-              <p className="mt-4 text-white/90">We provide project planning, cost estimation, structural design, permitting guidance, and regulatory compliance to help your projects succeed on time and within budget.</p>
-              <div className="mt-6 flex gap-3">
-                <a href="#consult" className="bg-green-500 text-white px-5 py-3 rounded font-medium hover:bg-green-600">Get a Consultation</a>
-                <button onClick={() => { if(window.navigateTo) window.navigateTo('about') }} className="border border-white/30 text-white px-5 py-3 rounded font-medium hover:bg-white/10">Learn More</button>
+                <h1 className="text-3xl sm:text-4xl font-bold gradient-bg animate-fade-in">svanik consultency - Expert Guidance</h1>
+              <p className="mt-3 sm:mt-4 text-sm sm:text-base text-white/90 animate-fade-in delay-200">We provide project planning, cost estimation, structural design, permitting guidance, and regulatory compliance to help your projects succeed on time and within budget.</p>
+              <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-3">
+                <a href="#consult" className="btn-gradient px-4 sm:px-5 py-2 sm:py-3 rounded font-medium text-center shadow-sm">Get a Consultation</a>
+                <button onClick={() => { if(window.navigateTo) window.navigateTo('about') }} className="border border-white/30 text-white px-4 sm:px-5 py-2 sm:py-3 rounded font-medium hover:bg-white/10 text-center">Learn More</button>
               </div>
             </div>
             <div className="bg-white/10 rounded-lg p-0 overflow-hidden">
-              <div className="carousel-container h-48 sm:h-56 md:h-64 w-full">
+              <div className="carousel-container h-40 sm:h-56 md:h-64 w-full">
                 <Carousel />
               </div>
             </div>
@@ -142,12 +161,12 @@ export default function Home(){
         </div>
       </section>
 
-      <main className="max-w-5xl mx-auto px-6 py-12">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
 
         {/* Consultation Form Section */}
-        <section id="consult" className="bg-white rounded shadow-lg p-8 mb-12">
-          <h2 className="text-2xl font-semibold mb-4">Quick Consultation Request</h2>
-          <p className="text-gray-600 mb-6">Tell us about your project and preferred consultation times.</p>
+        <section id="consult" className="bg-white rounded shadow-lg p-6 sm:p-8 mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-semibold mb-3 sm:mb-4">Quick Consultation Request</h2>
+          <p className="text-gray-600 mb-6 text-sm sm:text-base">Tell us about your project and preferred consultation times.</p>
           
           {submitted && <div className="bg-green-100 text-green-700 p-3 rounded mb-4">✓ Consultation request received! We'll contact you soon.</div>}
           
@@ -239,9 +258,9 @@ export default function Home(){
         </section>
 
         {/* Services Section */}
-        <section id="services" className="mb-12">
-          <h2 className="text-3xl font-semibold mb-6">Our Services</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <section id="services" className="mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-semibold mb-4 sm:mb-6">Our Services</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             <ServiceCard 
               title="📋 Project Planning" 
               desc="Comprehensive feasibility studies, scheduling, milestone planning, and resource allocation."
@@ -267,10 +286,10 @@ export default function Home(){
               desc="Oversight, quality control, timeline management, and stakeholder coordination."
             />
           </div>
-          <div className="mt-8 text-center">
+          <div className="mt-6 sm:mt-8 text-center">
             <button 
               onClick={() => { if(window.navigateTo) window.navigateTo('services') }}
-              className="border border-blue-600 text-blue-600 px-6 py-3 rounded font-medium hover:bg-blue-50"
+              className="border border-blue-600 text-blue-600 px-4 sm:px-6 py-2 sm:py-3 rounded font-medium hover:bg-blue-50 text-sm sm:text-base"
             >
               View All Services
             </button>
@@ -278,9 +297,9 @@ export default function Home(){
         </section>
 
         {/* Industry Images Gallery */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-semibold mb-6">Industry Experience</h2>
-          <p className="text-gray-600 mb-4">We have worked across diverse sectors — infrastructure, residential, commercial, industrial, and public works.</p>
+        <section className="mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-semibold mb-3 sm:mb-6">Industry Experience</h2>
+          <p className="text-gray-600 mb-4 text-sm sm:text-base">We have worked across diverse sectors — infrastructure, residential, commercial, industrial, and public works.</p>
           <div className="industry-grid">
             <div className="industry-card">
               <img src="https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=800&q=60" alt="infrastructure" />
@@ -328,9 +347,9 @@ export default function Home(){
         </section>
 
         {/* Testimonials Section */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-semibold mb-6">Testimonials & Case Studies</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <section className="mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-semibold mb-4 sm:mb-6">Testimonials & Case Studies</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             <TestimonialCard 
               quote="Excellent service and clear deliverables. They saved us months on permitting alone." 
               author="Sarah Johnson, Project Manager"
@@ -358,9 +377,14 @@ export default function Home(){
           </div>
         </section>
 
+        {/* Gallery Section */}
+        <section id="gallery" className="bg-white rounded shadow p-6 sm:p-8 mb-8 sm:mb-12">
+          <ImageGallery />
+        </section>
+
         {/* About Section */}
-        <section id="about" className="bg-white rounded shadow p-8 mb-12">
-          <h2 className="text-3xl font-semibold mb-4">About Us</h2>
+        <section id="about" className="bg-white rounded shadow p-6 sm:p-8 mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-semibold mb-4">About Us</h2>
           <p className="text-gray-700 mb-3">
             With over 20 years of combined experience in professional consultancy, our team brings practical expertise and a client-first approach to every engagement.
           </p>
@@ -373,9 +397,9 @@ export default function Home(){
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="bg-blue-50 rounded p-8 mb-12">
-          <h2 className="text-2xl font-semibold mb-4">Contact Information</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+        <section id="contact" className="bg-blue-50 rounded p-6 sm:p-8 mb-8 sm:mb-12">
+          <h2 className="text-xl sm:text-2xl font-semibold mb-4">Contact Information</h2>
+          <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
             <div>
               <p className="font-medium">Email:</p>
               <p className="text-blue-600">info@svanikconsultency.com</p>
@@ -398,16 +422,16 @@ export default function Home(){
       </main>
 
       {/* Footer */}
-      <footer className="bg-slate-800 text-white py-8">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-6 mb-6">
+      <footer className="bg-slate-800 text-white py-6 sm:py-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6">
             <div>
-              <h3 className="font-semibold mb-2">Civil Consulting</h3>
-              <p className="text-sm text-gray-300">Expert guidance for construction projects.</p>
+              <h3 className="font-semibold mb-2 text-sm">Civil Consulting</h3>
+              <p className="text-xs sm:text-sm text-gray-300">Expert guidance for construction projects.</p>
             </div>
             <div>
               <h3 className="font-semibold mb-2 text-sm">Quick Links</h3>
-              <ul className="text-sm text-gray-300 space-y-1">
+              <ul className="text-xs sm:text-sm text-gray-300 space-y-1">
                 <li><a href="#services" className="hover:text-white">Services</a></li>
                 <li><a href="#about" className="hover:text-white">About</a></li>
                 <li><a href="#contact" className="hover:text-white">Contact</a></li>
@@ -415,13 +439,13 @@ export default function Home(){
             </div>
             <div>
               <h3 className="font-semibold mb-2 text-sm">Legal</h3>
-              <ul className="text-sm text-gray-300 space-y-1">
+              <ul className="text-xs sm:text-sm text-gray-300 space-y-1">
                 <li><a href="#privacy" className="hover:text-white">Privacy Policy</a></li>
                 <li><a href="#terms" className="hover:text-white">Terms of Service</a></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-700 pt-4 flex justify-between items-center text-sm">
+          <div className="border-t border-gray-700 pt-4 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs sm:text-sm">
             <p>© {new Date().getFullYear()} svanik consultency. All rights reserved.</p>
             <div className="space-x-4">
               <a href="#" className="text-gray-300 hover:text-white">LinkedIn</a>
